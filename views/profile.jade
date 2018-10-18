@@ -1,0 +1,11 @@
+extends ./layout.jade
+block contenido
+    h1 #{User[0].name} #{User[0].last_name}
+    div(class="container")
+        div(class="pull-left mr-5")
+            img(src="/img/profile/Leo.jpg", alt="Imagen de Perfil")
+        div
+            span(class="font-weight-bold mr-2 text-warning") Usuario: 
+            span #{User[0].username}
+
+    

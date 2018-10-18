@@ -1,0 +1,7 @@
+
+.background{
+    background-image: url("/img/background.jpg");
+    background-repeat: repeat-x;
+    font-size: 14px;
+    font-weight: bolder;
+}

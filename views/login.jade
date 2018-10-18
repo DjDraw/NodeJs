@@ -1,0 +1,23 @@
+extends ./layout.jade
+block contenido
+    div(class="col-sm-6 mx-auto")
+        div(class="card mt-5")
+            div(class="card-body")
+                h1(class="text-center") 
+                    span(class="fa fa-sign-in")  Login
+                -if (message.length > 0){
+                    div(class="alert alert-danger")
+                        span #{message}
+                -}
+                form(action="/login" method="post")
+                    div(class="form-group")
+                        label(for="username") Usuario
+                        input(type="text" name="username" class="form-control")
+                    div(class="form-group")
+                        label(for="password") Contraseña
+                        input(type="password" name="password" class="form-control")
+                    input(type="submit" class="btn btn-dark btn-lg" value="Entrar")
+                hr
+                div(class="text-center")
+                    p Crear Cuenta
+                        a(href="/signup")  SignUp

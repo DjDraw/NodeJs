@@ -1,0 +1,46 @@
+extends ../../layout.jade
+block contenido
+    h1 Claro
+    hr
+    h4(class="text-warning") Buscar Registro
+    div(class="col-sm-3")
+        -if(msg){
+            div(class="alert alert-danger")
+                span #{msg}
+        -}
+        form(action="/campaign/claro" method="POST")
+            div(class="form-group")
+                label(for="document") Documento
+                input(type="number" name="document" class="form-control")
+            button(type="submit" class="btn btn-primary pull-right mb-5") Buscar
+    
+    -if(data){
+        div(class="container")
+            table(class="table table-hover")
+                thead
+                    tr
+                        th(scope="col")
+                        th(scope="col") Documento
+                        th(scope="col") Nombre
+                        th(scope="col") Lote
+                        th(scope="col") Stealth
+                tbody
+                    each item in data
+                        tr
+                            td(class="")
+                                div(class="form-group")
+                                    div(class="custom-control custom-checkbox")
+                                        input(class="custom-control-input" id="customCheck1" checked="" type="checkbox")
+                                        label(class="custom-control-label" for="customCheck1")
+                            td #{item.documento}
+                            td #{item.nombre} #{item.apellido}
+                            td #{item.idLote}
+                            -if(item.campo8.indexOf("\r") > 0 || item.campo8.indexOf("\n") > 0){
+                                td(class="text-danger") #{item.campo8}
+                            -}else{
+                                td #{item.campo8}
+                            -}
+        -}
+        
+
+    

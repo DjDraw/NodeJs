@@ -1,0 +1,31 @@
+extends ../layout.jade
+block contenido
+    h1 Jobs
+    hr
+    h4(class="text-warning") Status
+    div(class="container")
+        table(class="table table-hover")
+            thead
+                tr
+                    th(scope="col") Name
+                    th(scope="col") Status
+                    th(scope="col") Duration
+                    th(scope="col") Last Day Run
+                    th(scope="col") Last Time Run
+            tbody
+                each item in data
+                    tr
+                        td #{item.name}
+                        if item.run_status == 1
+                            td 
+                                span(class="text-success") Success!
+                        else
+                            td 
+                                span(class="text-danger") Error!
+                        td #{item.run_duration}
+                        -var day = item.run_datetime.getDate() + "/" + (item.run_datetime.getMonth() + 1) + "/" + (item.run_datetime.getFullYear());
+                        td #{day}
+                        -var time = item.run_datetime.getUTCHours() + ":" + item.run_datetime.getUTCMinutes();
+                        td #{time}
+
+    
