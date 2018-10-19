@@ -68,17 +68,4 @@ module.exports = (app) => {
             })
         }
     });
-
-    app.get("/ues", (req, res) => {
-        request({
-            url: 'https://forms.na1.netsuite.com/app/site/hosting/scriptlet.nl?script=111&deploy=1&compid=3793234&h=aee98a6ad66f59c47416&callback=jQuery222003360050927664893_1539954679426&search=UES0001993776&_=1539954679428',
-            json: true    
-
-        }, function (error, response, body) {
-    
-            if (!error && response.statusCode === 200) {
-                console.log(body);
-            }
-        });
-    });
 };
