@@ -51,7 +51,7 @@ module.exports = (app) => {
     });
 
     app.post("/campaign/claro/update", isLoggedIn, (req, res) => {
-        var control = ["Campo8","mail"];
+        var control = ["Campo8","mail","localidad"];
         if(control.indexOf(req.body.slcFields) > 0){
             seq.query("UPDATE AvCLARO.dbo.Ventas SET " + req.body.slcFields + " = ? WHERE documento = ?",
             { replacements: [req.body.value,req.body.id], type: seq.QueryTypes.UPDATE }
