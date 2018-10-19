@@ -25,7 +25,8 @@ app.use(passport.session());
 app.use(flash());
 
 //routes
-require("./routes")(app,passport);
+require("./routes/user")(app,passport);
+require("./routes/actions")(app);
 
 //static files
 app.use(express.static(path.join(__dirname,"library")));

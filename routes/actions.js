@@ -1,44 +1,16 @@
-const User = require('./model/sequelize/user').user;
-const sql = require('./model/sql/sql.js');
-const query = require('./model/sql/query.js');
-const seq = require('./model/sequelize/config.js').config;
-const isLoggedIn = require("./middlewares/session");
+const User = require('../model/sequelize/user').user;
+const sql = require('../model/sql/sql.js');
+const query = require('../model/sql/query.js');
+const seq = require('../model/sequelize/config.js').config;
+const isLoggedIn = require("../middlewares/session");
+const request = require("request");
 
-module.exports = (app, passport) => {
+
+
+module.exports = (app) => {
 
     app.get('/', isLoggedIn, (req, res) => {
         res.render('index');
-    });
-
-    //Signup
-    app.get('/signup', (req, res) => {
-        res.render('signup', {
-            message: req.flash('signupMessage')
-        });
-    });
-
-    app.post('/signup', passport.authenticate('localSignup',{
-        successRedirect: '/profile',
-        failureRedirect: '/signup',
-        failureFlash: true
-    }));
-
-    //Login
-    app.get('/login', (req, res) => {
-        res.render('login', {
-            message: req.flash('loginMessage')
-        });
-    });
-
-    app.post("/login", passport.authenticate('localLogin',{
-        successRedirect: "/",
-        failureRedirect: "/login",
-        failureFlash: true
-    }));
-
-    app.get("/logout", (req, res) => {
-        req.logout()
-        res.redirect("/login");
     });
 
     //jobs
@@ -86,7 +58,7 @@ module.exports = (app, passport) => {
             ).spread((result, metadata) => {
                 if(metadata > 0){
                     res.render("campaign/claro", {
-                        msg: "Se realizo la modificacion correctamente."
+                        msgSuccess: "Se realizo la modificacion correctamente."
                     });
                 }else{
                     res.render("campaign/claro", {
@@ -95,5 +67,18 @@ module.exports = (app, passport) => {
                 }
             })
         }
+    });
+
+    app.get("/ues", (req, res) => {
+        request({
+            url: 'https://forms.na1.netsuite.com/app/site/hosting/scriptlet.nl?script=111&deploy=1&compid=3793234&h=aee98a6ad66f59c47416&callback=jQuery222003360050927664893_1539954679426&search=UES0001993776&_=1539954679428',
+            json: true    
+
+        }, function (error, response, body) {
+    
+            if (!error && response.statusCode === 200) {
+                console.log(body);
+            }
+        });
     });
 };
