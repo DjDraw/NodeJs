@@ -10,6 +10,7 @@ module.exports = (app, passport) => {
         res.render('index');
     });
 
+    //Signup
     app.get('/signup', (req, res) => {
         res.render('signup', {
             message: req.flash('signupMessage')
@@ -22,6 +23,7 @@ module.exports = (app, passport) => {
         failureFlash: true
     }));
 
+    //Login
     app.get('/login', (req, res) => {
         res.render('login', {
             message: req.flash('loginMessage')
@@ -34,16 +36,12 @@ module.exports = (app, passport) => {
         failureFlash: true
     }));
 
-    app.get("/profile", isLoggedIn, (req, res) => {
-        res.render("index");
-        res.end();
-    });
-
     app.get("/logout", (req, res) => {
         req.logout()
         res.redirect("/login");
     });
 
+    //jobs
     app.get("/jobs", isLoggedIn, (req, res) => {
         sql.reporteria(query.jobs,function(data, err){
             if(err){
@@ -58,7 +56,8 @@ module.exports = (app, passport) => {
             }
         })
     });
-
+    
+    //CLARO
     app.get("/campaign/claro", isLoggedIn, (req, res) => {
         res.render("campaign/claro");
     });
@@ -77,5 +76,24 @@ module.exports = (app, passport) => {
                 });
             }
         })
+    });
+
+    app.post("/campaign/claro/update", isLoggedIn, (req, res) => {
+        var control = ["Campo8","mail"];
+        if(control.indexOf(req.body.slcFields) > 0){
+            seq.query("UPDATE AvCLARO.dbo.Ventas SET " + req.body.slcFields + " = ? WHERE documento = ?",
+            { replacements: [req.body.value,req.body.id], type: seq.QueryTypes.UPDATE }
+            ).spread((result, metadata) => {
+                if(metadata > 0){
+                    res.render("campaign/claro", {
+                        msg: "Se realizo la modificacion correctamente."
+                    });
+                }else{
+                    res.render("campaign/claro", {
+                        msg: "No se modifico ningun registro."
+                    });
+                }
+            })
+        }
     });
 };

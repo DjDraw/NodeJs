@@ -27,11 +27,11 @@ block contenido
                 tbody
                     each item in data
                         tr
-                            td(class="")
+                            td
                                 div(class="form-group")
                                     div(class="custom-control custom-checkbox")
-                                        input(class="custom-control-input" id="customCheck1" checked="" type="checkbox")
-                                        label(class="custom-control-label" for="customCheck1")
+                                        input(class="custom-control-input" id=""+item.id+"" type="checkbox" value=""+item.documento+"" onclick="setIdSale(this)")
+                                        label(class="custom-control-label" for=""+item.id+"")
                             td #{item.documento}
                             td #{item.nombre} #{item.apellido}
                             td #{item.idLote}
@@ -40,7 +40,25 @@ block contenido
                             -}else{
                                 td #{item.campo8}
                             -}
-        -}
+        h4(class="text-warning") Modificar Registro
+        div(class="container col-sm-4 pull-left")
+            form(action="/campaign/claro/update", method="post")
+                div(class="form-group")
+                    label(for="id") Id
+                    input(type="text" class="form-control text-warning" name="id" id="id" disabled)
+                div(class="form-group")
+                    label(for="slcFields") Campo
+                    select(class="form-control" name="slcFields" id="slcFields")
+                        option(value="" selected)
+                        option(value="mail") Email
+                        option(value="campo8") Campo8 (Stealth)
+                div(class="form-group")
+                    label(for="value") Valor
+                    input(type="text" class="form-control" name="value" id="value")
+                button(type="submit" class="btn btn-primary pull-right mb-5") Modificar
+    -}
+
+    
         
 
     
