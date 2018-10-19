@@ -66,6 +66,10 @@ module.exports = (app) => {
                     });
                 }
             })
+        }else{
+            res.render("campaign/claro", {
+                msg: "Campo a modificar no valido."
+            });
         }
     });
 };
