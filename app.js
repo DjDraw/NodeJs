@@ -32,5 +32,5 @@ require("./routes/actions")(app);
 app.use(express.static(path.join(__dirname,"library")));
 
 app.listen(3000, () => {
-    console.log("Server Up!");
+    console.log("Server Up!!!");
 });
