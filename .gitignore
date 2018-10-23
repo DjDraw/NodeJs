@@ -40,10 +40,10 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-library/
 !library/css/main.css
 !library/css/superHero.min.css
 !library/js/main.js
+library/
 
 # TypeScript v1 declaration files
 typings/
