@@ -34,8 +34,9 @@ module.exports = (app) => {
     });
 
     app.post("/campaign/claro", isLoggedIn, (req, res) => {
+        var stealth = "%" + req.body.document + "%"
         seq238.query(query.findClaro,
-            { replacements: [req.body.document], type: seq238.QueryTypes.SELECT }
+            { replacements: [req.body.document, stealth], type: seq238.QueryTypes.SELECT }
         ).then(ventas => {
             if(ventas.length <= 0){
                 return res.render("campaign/claro",{
@@ -98,7 +99,7 @@ module.exports = (app) => {
         if(control.indexOf(req.body.slcStatus) > -1){
             var contrato = "%"+req.body.contract+"%"
             seq238.query(query.updateUcm,
-                { replacements: [req.body.slcStatus,contrato], type: seq238.QueryTypes.UPDATE }
+                { replacements: [req.body.slcStatus,contrato,req.body.slcStatus,contrato], type: seq238.QueryTypes.UPDATE }
             ).spread((result, metadata) => {
                 if(metadata > 0){
                     res.render("campaign/ucm", {

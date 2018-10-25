@@ -9,7 +9,7 @@ var Jobs = "SELECT TOP 10 sj.name, " +
 "AND CONVERT(DATETIME, RTRIM(run_date)) + ((run_time / 10000 * 3600) + ((run_time % 10000) / 100 * 60) + (run_time % 10000) % 100) / (86399.9964) = t2.run_datetime2 " +
 "WHERE sjh.step_id = 0 AND (sj.name LIKE 'BD_%' OR sj.name LIKE 'Todas%') ";
 
-var findClaro = "SELECT * FROM AvCLARO.dbo.Ventas WHERE documento = ?";
+var findClaro = "SELECT * FROM AvCLARO.dbo.Ventas WHERE documento = ? OR campo8 Like ?";
 
 var findUcm = "SELECT campo2 Contrato,CASE WHEN t2.id_register IS NULL THEN t1.id ELSE t2.id_register END Id," + 
 " CASE WHEN t2.nombre IS NULL THEN t1.nombre ELSE t2.nombre END Nombre, " + 
@@ -17,7 +17,8 @@ var findUcm = "SELECT campo2 Contrato,CASE WHEN t2.id_register IS NULL THEN t1.i
 " CASE WHEN t2.doc IS NULL THEN t1.documento ELSE t2.doc END Documento " + 
 " FROM [AvUCM].[dbo].[Ventas] as t1 " + " LEFT JOIN [AvUCM].[dbo].beteficiarios as t2 ON t1.id = t2.id_register WHERE documento = ?";
 
-var updateUcm = "UPDATE AvUCM.dbo.Ventas SET estado = ?, fVenta = CAST(GETDATE() as date) WHERE campo2 LIKE ?";
+var updateUcm = "UPDATE AvUCM.dbo.Ventas SET estado = ?, fVenta = CAST(GETDATE() as date) WHERE campo2 LIKE ? " + 
+" UPDATE [10.100.1.1].AvREPORTERIA.dbo.Ventas SET reg_estado = ?, aCampo50 =  CAST(GETDATE() as date) WHERE aCampo37 LIKE ?";
 
 
 module.exports = {
