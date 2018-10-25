@@ -51,7 +51,7 @@ module.exports = function (passport){
         passReqToCallback: true
     },
     function (req, username, password, done){
-        seq.query('SELECT TOP 1 * FROM users WHERE username = ? AND status = 1',
+        seq.query('SELECT TOP 1 * FROM users WHERE username = ? AND status <> 0',
             { replacements: [username], type: seq.QueryTypes.SELECT }
         ).then(users => {
             if(users.length < 0){
