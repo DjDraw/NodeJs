@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const seq = require('./config.js').config;
+const seq = require('./config.js').srv238;
 const bcrypt = require('bcrypt-nodejs');
 
 const User = seq.define('user', {

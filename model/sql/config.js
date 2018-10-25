@@ -8,6 +8,17 @@ var reporteria = {
     }
 };
 
+var reportes = {
+    server: "10.80.36.53",
+    database: "Reportes",
+    user: "sa",
+    password: "_B13ndificil$",
+    options: {           
+        encrypt: false
+    }
+};
+
 module.exports = {
-    reporteria: reporteria
+    reporteria: reporteria,
+    reportes: reportes
 }

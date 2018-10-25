@@ -1,5 +1,5 @@
 const localStrategy = require('passport-local').Strategy;
-const seq = require('./config.js').config;
+const seq = require('./config.js').srv238;
 const User = require('./user.js').user;
 
 module.exports = function (passport){

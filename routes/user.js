@@ -1,7 +1,7 @@
 const User = require('../model/sequelize/user').user;
 const sql = require('../model/sql/sql.js');
 const query = require('../model/sql/query.js');
-const seq = require('../model/sequelize/config.js').config;
+const seq = require('../model/sequelize/config.js').srv238;
 const isLoggedIn = require("../middlewares/session");
 const request = require("request");
 

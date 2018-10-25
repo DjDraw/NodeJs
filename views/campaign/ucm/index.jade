@@ -1,0 +1,49 @@
+extends ../../layout.jade
+block contenido
+    h1 UCM
+    hr
+    h4(class="text-warning") Cambiar Estado Venta
+    div(class="col-sm-12")
+        -if(msg){
+            div(class="alert alert-danger")
+                span #{msg}
+        -}
+        -if(msgSuccess){
+            div(class="alert alert-success")
+                span #{msgSuccess}
+        -}
+        div(class="col-sm-4 pull-left")
+            form(action="/campaign/ucm" method="POST")
+                div(class='form-group')
+                    label(for='doc') Documento
+                    input(type='number' class='form-control' name='doc' id='doc')
+                button(type="submit" class="btn btn-primary pull-right mb-5") Buscar
+        div(class="col-sm-4 pull-left")
+            -if(data){
+                table(class="table table-hover")
+                    thead
+                        tr
+                            th(scope="col") Contrato
+                            th(scope="col") Nombre
+                            th(scope="col") Documento
+                    tbody
+                        each item in data
+                            tr
+                                td #{item.Contrato}
+                                td #{item.Nombre} #{item.Apellido}
+                                td #{item.Documento}
+            -}
+
+        div(class="col-sm-4 pull-left")
+            form(action="/campaign/ucm/update" method="POST")
+                div(class='form-group')
+                    label(for='contract') Contrato
+                    input(type='text' class='form-control' name='contract' id='contract')
+                div(class="form-group")
+                        label(for="slcStatus") Estado
+                        select(class="form-control" name="slcStatus" id="slcStatus")
+                            option(value="" selected)
+                            option(value="1") Exito
+                            option(value="3") Baja
+                            option(value="4") Pre Venta
+                button(type="submit" class="btn btn-primary pull-right mb-5") Actualizar

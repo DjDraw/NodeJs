@@ -16,6 +16,24 @@ const sequelize = new Sequelize('REPORTERIA', 'usraccmw', 'inc2001', {
 
 });
 
+const sequelize2 = new Sequelize('Reportes', 'sa', '_B13ndificil$', {
+  dialect: 'mssql',
+  host: '10.80.36.53',
+  operatorsAliases: false,
+  dialectOptions: {
+    encrypt: false
+  },
+
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+
+});
+
 module.exports = {
-    config: sequelize
+    srv238: sequelize,
+    srv53: sequelize2
 };
